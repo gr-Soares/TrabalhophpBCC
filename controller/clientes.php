@@ -1,30 +1,35 @@
 <?php
 
-namespace view;
+namespace controller;
+
+include_once 'C:\xampp\htdocs\web\model\cliente.php';
+include_once 'C:\xampp\htdocs\web\model\conn.php';
 
 use model\Cliente;
 use model\Conexao;
 
-class ClienteController
+class ClientesController
 {
-    public function Select()
+    public static function select()
     {
-        $sql = "SELECT * FROM clientes;";
+        $sql = "SELECT * FROM cliente;";
         $conn = Conexao::conectar();
         $result = $conn->query($sql);
         $conn = Conexao::desconectar();
 
+        $clientes = [];
+
         foreach($result as $c){
             $cliente = new Cliente($c["id"],$c["nome"],$c["email"],$c["telefone"]);
-            $clientes = $cliente;
+            $clientes[] = $cliente;
         }
 
         return $clientes;
     }
 
-    public function Insert(Cliente $cliente){
+    public static function insert(Cliente $cliente){
         $conn = Conexao::conectar();
-        $sql = $conn->prepare("INSERT INTO clientes VALUES(null, ?, ?, ?)");
+        $sql = $conn->prepare("INSERT INTO cliente VALUES(null, ?, ?, ?)");
         $sql->execute(array($cliente->getNome(), $cliente->getEmail(), $cliente->getTelefone()));
     }
 }
