@@ -1,10 +1,18 @@
+<?php
+
+include_once 'C:\xampp\htdocs\web\view\clientes.php';
+
+use view\ClientesView;
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cliente - Inserir</title>
+    <title>Carro - Inserir</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
@@ -13,20 +21,26 @@
 
     <div class="container">
         <div class="my-5">
-            <h2>INSERIR CLIENTE</h2>
+            <h2>INSERIR CARRO</h2>
         </div>
-        <form action="../view/clientes.php" method="POST">
+        <form action="../view/carros.php" method="POST">
             <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome">
+                <label for="placa" class="form-label">Placa</label>
+                <input type="text" class="form-control" id="placa" name="placa">
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo">
             </div>
             <div class="mb-3">
-                <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" name="telefone">
+                <label for="cor" class="form-label">Cor</label>
+                <input type="text" class="form-control" id="cor" name="cor">
+            </div>
+            <div class="mb-3">
+                <label for="cliente_id" class="form-label">Dono do Veiculo</label>
+                <select class="form-select" id="cliente_id" name="cliente_id">
+                    <?php ClientesView::selectFromSelect() ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Inserir</button>
         </form>

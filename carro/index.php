@@ -1,10 +1,18 @@
+<?php
+
+include_once 'C:\xampp\htdocs\web\view\carros.php';
+
+use view\CarrosView;
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cliente - Inserir</title>
+    <title>Carro - Consulta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
@@ -12,26 +20,25 @@
     <?php include_once '../templates/navbar.php' ?>
 
     <div class="container">
-        <div class="my-5">
-            <h2>INSERIR CLIENTE</h2>
+        <div class="my-5 d-flex justify-content-between">
+            <h2>CARROS</h2>
+            <a class="btn btn-primary" href="/web/carro/inserir.php" role="button">Novo</a>
         </div>
-        <form action="../view/clientes.php" method="POST">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="mb-3">
-                <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" name="telefone">
-            </div>
-            <button type="submit" class="btn btn-primary">Inserir</button>
-        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Carro</th>
+                    <th scope="col">Cor</th>
+                    <th scope="col">Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php CarrosView::select() ?>
+            </tbody>
+        </table>
     </div>
-
 
     <?php include_once '../templates/footer.php' ?>
 

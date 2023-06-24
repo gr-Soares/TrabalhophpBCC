@@ -34,7 +34,7 @@ use view\ClientesView;
                 </tr>
             </thead>
             <tbody>
-                <?php ClientesView::select() ?>
+                <?php ClientesView::selectFromTable() ?>
             </tbody>
         </table>
     </div>

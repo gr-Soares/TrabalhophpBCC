@@ -17,7 +17,7 @@ class ClientesView
         ClientesController::insert($cliente);
     }
 
-    public static function select()
+    public static function selectFromTable()
     {
         $clientes = ClientesController::select();
         foreach( $clientes as $cliente){
@@ -29,10 +29,18 @@ class ClientesView
                 </tr>";
         }
     }
+
+    public static function selectFromSelect()
+    {
+        $clientes = ClientesController::select();
+        foreach( $clientes as $cliente){
+            echo "<option value=".$cliente->getId().">".$cliente->getNome()."</option>";
+        }
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = new ClientesView;
     $data->insert($_POST);
-    header("location: ../cliente/consultar.php");
+    header("location: ../cliente");
 }

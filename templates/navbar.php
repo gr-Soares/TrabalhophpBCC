@@ -11,7 +11,7 @@
                         <a class="nav-link" href="#">Entrada/Saida</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Carros</a>
+                        <a class="nav-link" href="/web/carro">Carros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/web/cliente">Clientes</a>
