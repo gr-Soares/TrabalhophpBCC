@@ -29,7 +29,7 @@ class ClientesController
 
     public static function selectById($id)
     {
-        $sql = "SELECT * FROM cliente WHERE id=".$id.";";
+        $sql = "SELECT * FROM cliente WHERE id=" . $id . ";";
         $conn = Conexao::conectar();
         $result = $conn->query($sql);
         $conn = Conexao::desconectar();
@@ -49,5 +49,21 @@ class ClientesController
         $conn = Conexao::conectar();
         $sql = $conn->prepare("INSERT INTO cliente VALUES(null, ?, ?, ?)");
         $sql->execute(array($cliente->getNome(), $cliente->getEmail(), $cliente->getTelefone()));
+        $conn = Conexao::desconectar();
+    }
+
+    public static function remover(Cliente $cliente)
+    {
+        $conn = Conexao::conectar();
+        $conn->query("DELETE FROM cliente WHERE id=" . $cliente->getId() . ";");
+        $conn = Conexao::desconectar();
+    }
+
+    public static function editar(Cliente $cliente)
+    {
+        $conn = Conexao::conectar();
+        $sql = $conn->prepare("UPDATE cliente SET nome=?, email=?, telefone=? WHERE id=" . $cliente->getId() . ";");
+        $sql->execute(array($cliente->getNome(), $cliente->getEmail(), $cliente->getTelefone()));
+        $conn = Conexao::desconectar();
     }
 }

@@ -30,13 +30,30 @@ class CarrosView
                     <td>".$carro->getModelo()."</td>
                     <td>".$carro->getCor()."</td>
                     <td>".$carro->getCliente()->getNome()."</td>
+                    <td>
+                        <a class='btn btn-warning btn-sm' href='/web/carro/editar.php?id=".$carro->getId()."' role='button'>Editar</a>
+                        <a class='btn btn-danger btn-sm' href='/web/carro/delete.php?id=".$carro->getId()."' role='button'>Remover</a>
+                    </td>
                 </tr>";
         }
     }
-}
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = new CarrosView;
-    $data->insert($_POST);
-    header("location: ../carro");
+    public static function selectFromEdit($data)
+    {
+        $carro = CarrosController::selectById($data);
+        return $carro;
+    }
+
+    public static function remover($data)
+    {
+        $carro = CarrosController::selectById($data);
+        CarrosController::remover($carro);
+    }
+
+    public static function editar($data)
+    {
+        $cliente = ClientesController::selectById($data["cliente_id"]);
+        $carro = new Carro($data["id"], $data["placa"], $data["modelo"], $data["cor"], $cliente);
+        CarrosController::editar($carro);
+    }
 }

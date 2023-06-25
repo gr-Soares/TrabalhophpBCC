@@ -1,3 +1,17 @@
+<?php
+
+include_once 'C:\xampp\htdocs\web\view\clientes.php';
+
+use view\ClientesView;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = new ClientesView;
+    $data->insert($_POST);
+    header("location: ../cliente");
+}
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -15,7 +29,7 @@
         <div class="my-5">
             <h2>INSERIR CLIENTE</h2>
         </div>
-        <form action="../view/clientes.php" method="POST">
+        <form action="inserir.php" method="POST">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome">

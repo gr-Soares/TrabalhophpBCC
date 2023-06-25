@@ -1,15 +1,14 @@
 <?php
-
 include_once 'C:\xampp\htdocs\web\view\clientes.php';
-include_once 'C:\xampp\htdocs\web\view\carros.php';
 
 use view\ClientesView;
-use view\CarrosView;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = new CarrosView;
-    $data->insert($_POST);
-    header("location: ../carro");
+    $data = new ClientesView;
+    $data->editar($_POST);
+    header("location: ../cliente");
+}else{
+    $cliente = ClientesView::selectFromEdit($_GET["id"]);
 }
 
 ?>
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Carro - Inserir</title>
+    <title>Cliente - Editar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
@@ -29,28 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="container">
         <div class="my-5">
-            <h2>INSERIR CARRO</h2>
+            <h2>EDITAR CLIENTE</h2>
         </div>
-        <form action="inserir.php" method="POST">
+        <form action="editar.php" method="POST">
+            <input type="hidden" class="form-control" id="id" name="id" value=<?php echo $cliente->getId() ?>>
             <div class="mb-3">
-                <label for="placa" class="form-label">Placa</label>
-                <input type="text" class="form-control" id="placa" name="placa">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value=<?php echo $cliente->getNome() ?>>
             </div>
             <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value=<?php echo $cliente->getEmail() ?>>
             </div>
             <div class="mb-3">
-                <label for="cor" class="form-label">Cor</label>
-                <input type="text" class="form-control" id="cor" name="cor">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="telefone" name="telefone" value=<?php echo $cliente->getTelefone() ?>>
             </div>
-            <div class="mb-3">
-                <label for="cliente_id" class="form-label">Dono do Veiculo</label>
-                <select class="form-select" id="cliente_id" name="cliente_id">
-                    <?php ClientesView::selectFromSelect() ?>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Inserir</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
         </form>
     </div>
 

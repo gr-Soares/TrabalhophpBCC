@@ -32,6 +32,7 @@ use view\CarrosView;
                     <th scope="col">Carro</th>
                     <th scope="col">Cor</th>
                     <th scope="col">Cliente</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>

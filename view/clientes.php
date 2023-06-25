@@ -20,12 +20,16 @@ class ClientesView
     public static function selectFromTable()
     {
         $clientes = ClientesController::select();
-        foreach( $clientes as $cliente){
+        foreach ($clientes as $cliente) {
             echo "<tr>
-                    <th scope='row'>".$cliente->getId()."</th>
-                    <td>".$cliente->getNome()."</td>
-                    <td>".$cliente->getEmail()."</td>
-                    <td>".$cliente->getTelefone()."</td>
+                    <th scope='row'>" . $cliente->getId() . "</th>
+                    <td>" . $cliente->getNome() . "</td>
+                    <td>" . $cliente->getEmail() . "</td>
+                    <td>" . $cliente->getTelefone() . "</td>
+                    <td>
+                        <a class='btn btn-warning btn-sm' href='/web/cliente/editar.php?id=" . $cliente->getId() . "' role='button'>Editar</a>
+                        <a class='btn btn-danger btn-sm' href='/web/cliente/delete.php?id=" . $cliente->getId() . "' role='button'>Remover</a>
+                    </td>
                 </tr>";
         }
     }
@@ -33,14 +37,26 @@ class ClientesView
     public static function selectFromSelect()
     {
         $clientes = ClientesController::select();
-        foreach( $clientes as $cliente){
-            echo "<option value=".$cliente->getId().">".$cliente->getNome()."</option>";
+        foreach ($clientes as $cliente) {
+            echo "<option value=" . $cliente->getId() . ">" . $cliente->getNome() . "</option>";
         }
     }
-}
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = new ClientesView;
-    $data->insert($_POST);
-    header("location: ../cliente");
+    public static function selectFromEdit($data)
+    {
+        $cliente = ClientesController::selectById($data);
+        return $cliente;
+    }
+
+    public static function remover($data)
+    {
+        $cliente = ClientesController::selectById($data);
+        ClientesController::remover($cliente);
+    }
+
+    public static function editar($data)
+    {
+        $cliente = new Cliente($data["id"], $data["nome"], $data["email"], $data["telefone"]);
+        ClientesController::editar($cliente);
+    }
 }
