@@ -43,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="inserir.php" method="POST">
             <div class="mb-3">
                 <label for="placa" class="form-label">Placa</label>
-                <input type="text" class="form-control" id="placa" name="placa">
+                <input type="text" required class="form-control" id="placa" name="placa">
             </div>
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo">
+                <input type="text" required class="form-control" id="modelo" name="modelo">
             </div>
             <div class="mb-3">
                 <label for="cor" class="form-label">Cor</label>
-                <input type="text" class="form-control" id="cor" name="cor">
+                <input type="text" required class="form-control" id="cor" name="cor">
             </div>
             <div class="mb-3">
                 <label for="cliente_id" class="form-label">Dono do Veiculo</label>
