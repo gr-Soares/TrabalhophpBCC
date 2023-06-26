@@ -1,3 +1,10 @@
+<?php
+session_start();
+$token = $_SESSION["token"];
+if ($token == "") {
+    header("location: /web/login.php");
+}
+?>
 <!doctype html>
 <html lang="pt-br">
 

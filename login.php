@@ -1,16 +1,19 @@
 <?php
-session_start();
-$token = $_SESSION["token"];
-if ($token == "") {
-    header("location: /web/login.php");
+
+include_once 'C:\xampp\htdocs\web\view\login.php';
+
+use view\LoginView;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (LoginView::login($_POST)) {
+        header("location: /web/");
+    } else {
+        echo "<div class='alert alert-warning' role='alert'>Login Invalido</div>";
+    }
+} else {
+    session_start();
+    $_SESSION["token"] = "";
 }
-?>
-
-<?php
-
-include_once 'C:\xampp\htdocs\web\view\carros.php';
-
-use view\CarrosView;
 
 ?>
 
@@ -20,36 +23,27 @@ use view\CarrosView;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Carro - Consulta</title>
+    <title>Estacionamento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php include_once '../templates/navbar.php' ?>
-
     <div class="container">
-        <div class="my-5 d-flex justify-content-between">
-            <h2>CARROS</h2>
-            <a class="btn btn-primary" href="/web/carro/inserir.php" role="button">Novo</a>
+        <div class="my-5">
+            <h2>LOGIN</h2>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Placa</th>
-                    <th scope="col">Carro</th>
-                    <th scope="col">Cor</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php CarrosView::select() ?>
-            </tbody>
-        </table>
+        <form action="login.php" method="POST">
+            <div class="mb-3">
+                <label for="login" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="login" name="login">
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha">
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
     </div>
-
-    <?php include_once '../templates/footer.php' ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

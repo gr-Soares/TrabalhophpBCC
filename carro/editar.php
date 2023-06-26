@@ -1,4 +1,12 @@
 <?php
+session_start();
+$token = $_SESSION["token"];
+if ($token == "") {
+    header("location: /web/login.php");
+}
+?>
+
+<?php
 include_once 'C:\xampp\htdocs\web\view\carros.php';
 
 use view\CarrosView;
@@ -35,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="hidden" class="form-control" id="cliente_id" name="cliente_id" value=<?php echo $carro->getCliente()->getId() ?>>
             <div class="mb-3">
                 <label for="placa" class="form-label">Placa</label>
-                <input type="text" class="form-control" id="placa" name="placa" value=<?php echo $carro->getPlaca()?>>
+                <input type="text" class="form-control" id="placa" name="placa" value=<?php echo $carro->getPlaca() ?>>
             </div>
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo" value=<?php echo $carro->getModelo()?>>
+                <input type="text" class="form-control" id="modelo" name="modelo" value=<?php echo $carro->getModelo() ?>>
             </div>
             <div class="mb-3">
                 <label for="cor" class="form-label">Cor</label>
-                <input type="text" class="form-control" id="cor" name="cor" value=<?php echo $carro->getCor()?>>
+                <input type="text" class="form-control" id="cor" name="cor" value=<?php echo $carro->getCor() ?>>
             </div>
             <button type="submit" class="btn btn-primary">Editar</button>
         </form>

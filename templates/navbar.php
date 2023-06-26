@@ -13,6 +13,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/web/cliente">Clientes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/login.php">Sair</a>
+                    </li>
                 </ul>
             </div>
         </div>
