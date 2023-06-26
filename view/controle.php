@@ -134,4 +134,20 @@ class ControleView
         }
         return "Vagas: ".$cont;
     }
+
+    public static function valorHora()
+    {
+        $config = ConfigController::select();
+        $valor = $config["valorHora"];
+        return "Tarifa por Hora: R$".$valor;
+    }
+
+    public static function valorBase()
+    {
+        $config = ConfigController::select();
+        $valor = (float) $config["valorBase"];
+        $valor2 = (float) $config["valorHora"];
+        $resultado = $valor + $valor2;
+        return "Tarifa Minima: R$".number_format($resultado, 2, ',', '.');;
+    }
 }

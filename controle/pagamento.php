@@ -21,6 +21,7 @@ $registro = ControleView::selectPagamento($_GET["id"]);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Controle - Pagamento</title>
+    <link rel="icon" href="/web/public/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
@@ -30,6 +31,8 @@ $registro = ControleView::selectPagamento($_GET["id"]);
     <div class="container">
         <div class="my-5 d-flex justify-content-between">
             <h2>PAGAMENTO</h2>
+            <h4><?php echo ControleView::valorBase() ?></h4>
+            <h4><?php echo ControleView::valorHora() ?></h4>
         </div>
         <hr>
         <div class="my-5 d-flex justify-content-between">
