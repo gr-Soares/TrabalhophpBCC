@@ -22,9 +22,9 @@ class ControleController
 
         $controles = [];
 
-        foreach($result as $c){
+        foreach ($result as $c) {
             $carro = CarrosController::selectById($c["veiculo"]);
-            $controle = new Controle($c["id"],$c["entrada"],$c["saida"], $carro);
+            $controle = new Controle($c["id"], $c["entrada"], $c["saida"], $c["pago"], $carro);
             $controles[] = $controle;
         }
 
@@ -42,17 +42,18 @@ class ControleController
 
         foreach ($result as $c) {
             $carro = CarrosController::selectById($c["veiculo"]);
-            $controle = new Controle($c["id"],$c["entrada"],$c["saida"], $carro);
+            $controle = new Controle($c["id"], $c["entrada"], $c["saida"], $c["pago"], $carro);
             $controles[] = $controle;
         }
 
         return $controles[0];
     }
 
-    public static function insert(Controle $controle){
+    public static function insert(Controle $controle)
+    {
         $conn = Conexao::conectar();
-        $sql = $conn->prepare("INSERT INTO controle VALUES(null, ?, ?, ?)");
-        $sql->execute(array($controle->getEntrada(), $controle->getSaida(), $controle->getVeiculo()->getId()));
+        $sql = $conn->prepare("INSERT INTO controle VALUES(null, ?, ?, ?, ?)");
+        $sql->execute(array($controle->getEntrada(), $controle->getSaida(), false, $controle->getVeiculo()->getId()));
         $conn = Conexao::desconectar();
     }
 
@@ -66,8 +67,8 @@ class ControleController
     public static function editar(Controle $controle)
     {
         $conn = Conexao::conectar();
-        $sql = $conn->prepare("UPDATE controle SET entrada=?, saida=? WHERE id=" . $controle->getId() . ";");
-        $sql->execute(array($controle->getEntrada(), $controle->getSaida()));
+        $sql = $conn->prepare("UPDATE controle SET entrada=?, saida=?, pago=? WHERE id=" . $controle->getId() . ";");
+        $sql->execute(array($controle->getEntrada(), $controle->getSaida(), $controle->getPago()));
         $conn = Conexao::desconectar();
     }
 }

@@ -11,14 +11,16 @@ class Controle
     private ?int $id;
     private ?string $entrada;
     private ?string $saida;
+    private ?bool $pago;
     private ?Carro $veiculo;
 
-    public function __construct(?int $id, ?string $entrada, ?string $saida, ?Carro $veiculo)
+    public function __construct(?int $id, ?string $entrada, ?string $saida, ?bool $pago, ?Carro $veiculo)
     {
         $this->id = $id;
         $this->entrada = $entrada;
         $this->saida = $saida;
         $this->veiculo = $veiculo;
+        $this->pago = $pago;
     }
 
     public function getId()
@@ -34,6 +36,11 @@ class Controle
     public function getSaida()
     {
         return $this->saida;
+    }
+
+    public function getPago()
+    {
+        return $this->pago;
     }
 
     public function getVeiculo()
