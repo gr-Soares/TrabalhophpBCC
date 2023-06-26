@@ -121,4 +121,17 @@ class ControleView
         }
         return 1;
     }
+
+    public static function vagas()
+    {
+        $config = ConfigController::select();
+        $historico = ControleController::select();
+        $cont = (int) $config["vagas"];
+        foreach ($historico as $registro) {
+            if ($registro->getSaida() == "") {
+                $cont -= 1;
+            }
+        }
+        return "Vagas: ".$cont;
+    }
 }

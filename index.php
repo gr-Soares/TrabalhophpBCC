@@ -23,6 +23,7 @@ use view\ControleView;
     <div class="container">
         <div class="my-5 d-flex justify-content-between">
             <h2>VISÃO GERAL</h2>
+            <h4><?php echo ControleView::vagas() ?></h4>
         </div>
         <table class="table table-striped">
             <thead>
